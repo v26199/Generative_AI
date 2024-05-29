@@ -14,7 +14,7 @@ This project is a simple Streamlit web application that generates blog posts bas
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/blog-generation-project.git
+https://github.com/v26199/Generative_AI/tree/main/Blogs_generation_LLMs
 cd blog-generation-project
 
 2. Install the required dependencies:
