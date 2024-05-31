@@ -30,7 +30,7 @@ To get started with MediMate, follow these simple steps:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/medimate.git
+   git clone https://github.com/v26199/medimate.git
    ```
 
 2. Install dependencies:
