@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelAssist</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {/* default image */
+            background-image: url('/static/images/1.jpg');
+            background-repeat: no-repeat;
+            /* background-position: center; */
+            background-position: top center; 
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            padding: 50px; 
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f4f4f2;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 2.5em;
+            margin-bottom: 50px; 
+            position: absolute;  
+            left: 20px; 
+            top: 5px;  
+            z-index: 11;
+            color: #EAEDED;
+        }
+
+        .nav {
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+            transition: 0.3s;
+            padding: 10px;
+            border-radius: 5px;
+            margin-left:200px;
+            z-index:10;
+            color: #70483c;
+            
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: black;
+            opacity: 0.7;
+            padding: 5px;
+            border-radius: 5px;
+            transition: 0.3s;
+            color:rgb(171, 216, 215);
+            font-size: 1.5em;
+            color: #EAEDED;
+        }
+
+        .nav a:hover {
+            opacity: 1;
+            background-color: #1C2833;
+        }
+
+        .chatbot-icon {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: url('/static/images/chatbot_6231457.png') no-repeat center #1C2833; /* Add a background color to the chat icon */
+            background-size: contain;
+            cursor: pointer;
+            right: 60px;
+            z-index: 12;
+            transition: all 0.3s ease;
+            border-radius: 50%;  /* makes the shape oval */
+            width: 70px;         /* Adjust as per the desired size */
+            height: 50px;  
+        }
+
+        .chatbot-icon:hover {
+            opacity: 0.8;
+            animation: rotateAndChangeColor 2s linear infinite; 
+        }
+
+        .chatbot-icon:hover, .chatbot-icon:active {
+            animation: rotateAndChangeColor 2s linear forwards;  /* 2 is just 2-4 seconds range average */
+        }
+
+        .chat-container {
+            width: 30%;
+            margin: 0 auto;
+            border-radius: 5px;
+            position: fixed;
+            right: 5%;
+            bottom: 10%;
+            padding: 10px;
+            overflow: auto;
+            height: 550px;
+            display: none;
+            z-index: 12;
+            border: 1px solid #ABB2B9; /* Gray border for contrast */
+            background: #2C3E50;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .chat-header {
+            padding: 10px;
+            color: white;
+            text-align: center;
+            background: #34495E;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .chat-content {
+            margin-top: 60px;
+            overflow-y: auto;
+            height: 280px; /* adjusted height */
+            background: #2C3E50;
+        }
+
+        .chat-message {
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            background: #836262;
+            color: #EAEDED;
+        }
+
+        .chat-message.user {
+            text-align: right;
+            background-color: #3498DB;
+        }
+
+        .chat-message.bot {
+            text-align: left;
+            background-color: #1A5276;
+        }
+
+        .chat-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 0; /* Remove padding here */
+            background: #34495E; 
+            border-radius: 0 0 5px 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Added this to align the items vertically in the center */
+        }
+
+        .chat-footer input {
+            width: 80%;
+            margin-right: 0px; /* Set margin to 0 */
+            margin-left: 0px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            flex: 4; /* Adjust flex to allocate space */
+            background: #5D6D7E; /* Muted dark gray-blue for input */
+            color: #EAEDED; 
+        }
+
+        .chat-footer button {
+            padding: 10px 15px;
+            margin-left: 2px; /* Set margin to 0 */
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #3498DB; /* Bright blue button for a touch of brightness */
+            color: #EAEDED; 
+        }
+
+        @keyframes rotateAndChangeColor {
+            0% {
+                background: radial-gradient(circle, red, orange, yellow, green, blue, indigo, violet);
+                transform: rotate(0deg);
+            }
+            100% {
+                background: radial-gradient(circle, violet, red, orange, yellow, green, blue, indigo);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+    </style>
+    <link rel="preload" href="/static/images/1.jpg" as="image">
+    <link rel="preload" href="/static/images/2.jpg" as="image">
+    <link rel="preload" href="/static/images/3.jpg" as="image">
+    <link rel="preload" href="/static/images/4.jpg" as="image">
+    <link rel="preload" href="/static/images/5.jpg" as="image">
+    <link rel="preload" href="/static/images/6.jpg" as="image">
+    <link rel="preload" href="/static/images/7.jpg" as="image">
+    <link rel="preload" href="/static/images/8.jpg" as="image">
+    <link rel="preload" href="/static/images/9.jpg" as="image">
+</head>
+<body>
+    <h1>HotelAssist</h1>
+
+    <div class="nav" aria-label="Main Navigation" role="navigation">
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Services</a>
+        <a href="#">Help</a>
+    </div>
+
+    <div class="chatbot-icon" aria-label="Open Chatbot" tabindex="0"></div>
+
+    <div class="chat-container" role="dialog">
+        <div class="chat-header">
+            <h2>HotelAssist</h2>
+        </div>
+        <div id="chat-content" class="chat-content" aria-live="polite">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div class="chat-footer">
+            <input id="chat-input" type="text" placeholder="Type a message" aria-label="Chat Input">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const images = [
+                '/static/images/1.jpg',
+                '/static/images/2.jpg',
+                '/static/images/3.jpg',
+                '/static/images/4.jpg',
+                '/static/images/5.jpg',
+                '/static/images/6.jpg',
+                '/static/images/7.jpg',
+                '/static/images/8.jpg',
+                '/static/images/9.jpg'
+            ];
+    
+            let currentImageIndex = 0;
+            document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`; // Setting the first image
+    
+            setInterval(() => {
+                currentImageIndex++;
+                if (currentImageIndex >= images.length) {
+                    currentImageIndex = 0;
+                }
+                document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+            }, 5000);
+            
+    
+            // The chatbot script
+            const chatIcon = document.querySelector('.chatbot-icon');
+            const chatContainer = document.querySelector('.chat-container');
+            const chatInput = document.getElementById('chat-input');
+            const chatContent = document.getElementById('chat-content');
+            const sendButton = document.getElementById('send-button');
+    
+            let isFirstTimeOpened = true;
+    
+            function showDefaultBotMessage() {
+                const defaultBotMessage = "Hello! How can I assist you with your hotel needs today?";
+                const botMessageElement = document.createElement('div');
+                botMessageElement.classList.add('chat-message', 'bot');
+                botMessageElement.textContent = "Bot: " + defaultBotMessage;
+                chatContent.append(botMessageElement);
+            }
+    
+            chatIcon.addEventListener('click', () => {
+                chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
+                if (isFirstTimeOpened && chatContainer.style.display !== 'none') {
+                    showDefaultBotMessage();
+                    isFirstTimeOpened = false;
+                }
+            });
+    
+            chatInput.addEventListener('keydown', (event) => {
+                if (event.key === 13) {  // Check if Enter key is pressed
+                    event.preventDefault();  // Prevent default behavior of Enter key
+                    sendButton.click();      // Trigger send button's click event
+                }
+            });
+    
+            // ... Existing code
+            sendButton.addEventListener('click', async () => {
+                const userText = chatInput.value;
+                if (userText.trim() !== '') {
+                    chatInput.value = '';
+
+                    // Display user message
+                    const userMessageElement = document.createElement('div');
+                    userMessageElement.classList.add('chat-message', 'user');
+                    userMessageElement.textContent = "You: " + userText;
+                    chatContent.append(userMessageElement);
+                    chatContent.scrollTop = chatContent.scrollHeight;
+
+                    // Send POST request to server
+                    try {
+                        let response = await fetch('/chat', { // Change the URL to relative
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ user_input: userText })
+                        });
+
+                        let responseData = await response.json();
+                        let botMessage = responseData.response;
+
+                        // Display bot response
+                        const botMessageElement = document.createElement('div');
+                        botMessageElement.classList.add('chat-message', 'bot');
+                        botMessageElement.textContent = "Bot: " + botMessage;
+                        chatContent.append(botMessageElement);
+                        chatContent.scrollTop = chatContent.scrollHeight;
+
+                    } catch (error) {
+                        alert('Error connecting to chatbot backend!');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
