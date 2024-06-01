@@ -20,19 +20,6 @@ def generate_story(scenario):
     story_generate = pipeline("text-generation", model="nvidia/Llama3-ChatQA-1.5-8B")
     print(story_generate(scenario))
 
-    # template = """
-    # You are a storyteller. Generate a story related to the given text in a very accurate manner.
-    # The story should be less than 50 words and most relevant.
-    # CONTEXT: {scenario}
-    # STORY:
-    # """
-    # prompt = PromptTemplate(template=template, input_variables=['scenario'])
-    # llm = OpenAI(openai_api_key=openai_api_key)  # Assuming you have loaded the API key from the .env file
-    # story_llm = LLMChain(llm=llm, prompt=prompt, verbose=True)
-
-    # story = story_llm.predict(scenario=scenario)
-    # return story
-
 
 def text2speech(message):
     # API_URL = "https://api-inference.huggingface.co/models/myshell-ai/MeloTTS-English"
