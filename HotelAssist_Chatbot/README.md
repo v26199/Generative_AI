@@ -31,6 +31,4 @@ The study design is robust, and structured to navigate the intricacies of Toront
    - Rigorous testing phases using both simulated and real-world interactions.
    - Ensure flawless integration within Toronto's diverse hotel landscape.
 
-## 📬 Contact
-For deeper insights, collaborations, or questions, please reach out to us at [project-email@example.com](mailto:project-email@example.com).
 
