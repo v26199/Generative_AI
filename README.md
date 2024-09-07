@@ -1,6 +1,6 @@
 ### **Generative AI Playground**
 
-**Welcome to my generative AI sandbox!** This repository showcases a collection of projects I've built to explore the exciting possibilities of AI-generated content. From crafting engaging blog posts to providing personalized assistance, these projects demonstrate my passion for pushing the boundaries of what's possible with generative models.
+**Welcome to my generative AI sandbox** This repository showcases a collection of projects I've built to explore the exciting possibilities of AI-generated content. From crafting engaging blog posts to providing personalized assistance, these projects demonstrate my passion for pushing the boundaries of what's possible with generative models.
 
 ### **Key Projects**
 
