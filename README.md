@@ -27,7 +27,7 @@
 
 **Let's explore the world of generative AI together!** Feel free to dive into the code, ask questions, or suggest new projects. 
 
-**Want to collaborate?** Reach out to me at [your email address].
+**Want to collaborate?** Reach out to me at vishubpatel4@gmail.com
 
 ### **Hashtags**
 * #generativeAI
